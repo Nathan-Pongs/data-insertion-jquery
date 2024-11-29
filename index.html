@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        span {
+            color: red;
+        }
+        table {
+            width: 70%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            text-align: left;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: green;
+            color: white;
+            padding: 8px;
+        }
+        td {
+            background-color: #f9f9f9;
+            padding: 8px;
+        }
+        .email {
+            text-decoration: underline;
+            color: blue;
+            font-weight: bold;
+        }
+        label {
+            margin-top: 10px;
+        }
+        .btn {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #btnAdd {
+            background-color: green;
+            color: white;
+        }
+        #btnClear {
+            background-color: red;
+            color: white;
+        }
+        #btnAdd:hover {
+            background-color: darkgreen;
+        }
+        #btnClear:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <form id="form" action="javascript:void(0)">
+        <label for="fname">First name<span class="required">*</span></label>
+        <input id="fname" type="text" placeholder="First name" required>
+        <label for="lname">Last name<span class="required">*</span></label>
+        <input id="lname" type="text" placeholder="Last name" required>
+        <label for="email">Email<span class="required">*</span></label>
+        <input id="email" type="email" placeholder="Email" required>
+        <div class="btn">
+            <button id="btnAdd">Add</button>
+            <button id="btnClear">Clear</button>
+        </div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+    <script>
+        $(function() {
+            $('#form').on('submit', function() {
+
+                const fname = $('#fname').val().trim();
+                const lname = $('#lname').val().trim();
+                const email = $('#email').val().trim();
+
+                const newRow = $('<tr>');
+                newRow.append($('<td>').text(fname));
+                newRow.append($('<td>').text(lname));
+                newRow.append($('<td>', {
+                    class: 'email'
+                }).text(email));
+
+                $('#tableBody').append(newRow);
+            });
+            $('#btnClear').on('click', function() {
+                $('#form')[0].reset();
+            })
+        });
+    </script>
+</body>
+</html>
